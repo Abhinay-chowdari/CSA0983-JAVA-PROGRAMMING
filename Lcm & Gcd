@@ -1,0 +1,36 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class lcmgcd {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("N value: ");
+        int n = scanner.nextInt();
+        
+        BigInteger[] numbers = new BigInteger[n];
+        for (int i = 0; i < n; i++) {
+            System.out.print("Number " + (i + 1) + ": ");
+            numbers[i] = scanner.nextBigInteger();
+        }
+        
+        BigInteger lcm = findLCM(numbers);
+        BigInteger gcd = findGCD(numbers);
+        
+        System.out.println("LCM: " + lcm);
+        System.out.println("GCD: " + gcd);
+    }
+    public static BigInteger findLCM(BigInteger[] numbers) {
+        BigInteger lcm = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            lcm = lcm.multiply(numbers[i]).divide(lcm.gcd(numbers[i]));
+        }
+        return lcm;
+    }
+    public static BigInteger findGCD(BigInteger[] numbers) {
+        BigInteger gcd = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            gcd = gcd.gcd(numbers[i]);
+        }
+        return gcd;
+    }
+}
